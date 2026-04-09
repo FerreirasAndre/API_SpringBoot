@@ -13,12 +13,21 @@ public class UsuarioService {
 	this.repository = repository;
 	}
 	
-	public Usuario cadastrar (Usuario usuario) {
-		if (repository.findByEmail(usuario.getEmail()).isPresent()){
-			throw new IllegalArgumentException("E-mail já cadastrado");			
-		}
-		
-		return repository.save(usuario);
-	
+	public String salvarUsuario (Usuario usuario) {
+		repository.save(usuario);
+		return "Usuário cadastrado com sucesso!!!";
 	}
+	
+	public Usuario buscaUsuarioId (Integer id) {
+		return repository.findById(id).orElseThrow(
+				()  -> new RuntimeException("Id não foi encontrado"));
+	}
+	
+	public Usuario buscaUsuarioEmail (String email) {
+		return repository.findByEmail(email).orElseThrow(
+				() ->  new RuntimeException("E-mail não encontrado"));
+				
+	}
+	
+
 }
