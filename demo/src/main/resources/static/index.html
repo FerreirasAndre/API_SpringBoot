@@ -7,14 +7,25 @@
     <link rel="stylesheet"  href="./css/style.css">
 </head>
 <body>
+	
+	<div>
     <h1>Cadastro de usuários</h1>
-    <form id="formUsuario"></form>
+    <form id="formUsuario">
         <input type="hidden" id="Id">
         <input type="text" id="nome" placeholder="Nome" required>
         <input type="email" id="email" placeholder="E-mail" required>
         <input type="password" id="senha" placeholder="Senha" required>
         <button type="submit" id="submitBtn">Salvar</button>
+		<button type="button" id="cancelBtn" style="display">Cancelar</button>
 		
-		<script src="./script/script.js"></script>
+	</form>	
+	<hr>
+	
+	<h2> Lista de Usuários</h2>
+	<button type="button" id="listarBtn"> Listar Usuários</button>
+	<ul id="listaUsuarios"></ul>
+	</div>
+	
+	<script src="./script/script.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package APISpring.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import APISpring.services.UsuarioService;
 
 @RestController
 @RequestMapping(value="usuario")
+@CrossOrigin(origins = "*")
 public class UsuarioControllers {
 	
 	private final UsuarioService service;
@@ -40,17 +42,17 @@ public class UsuarioControllers {
 		return response;
 	}
 	
-	@GetMapping(value ="email")
+	@GetMapping(value ="/{email}")
 	public Usuario procuraPorEmail(@PathVariable String email) {
 		return service.buscaUsuarioEmail(email);
 	}
 
-	@DeleteMapping
+	@DeleteMapping(value="/{id}")
 	public void excluirUsuario(@PathVariable Integer id) {
 		service.deletaPorId(id);
 	}
 	
-	@PutMapping
+	@PutMapping(value="/{id}")
 	public String editaUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
 		String response = service.editarusuario(id, usuario);
 		return response;
