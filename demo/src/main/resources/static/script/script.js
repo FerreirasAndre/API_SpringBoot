@@ -1,12 +1,10 @@
 const apiURL = "http://localhost:8080/usuario";
 const formUsuario = document.getElementById("formUsuario");
-const listaUsuarios = document.getElementById("listaUsuarios"); // Variável com U maiúsculo
+const listaUsuarios = document.getElementById("listaUsuarios"); 
 const IdInput = document.getElementById("Id");
 const nomeInput = document.getElementById("nome");
 const emailInput = document.getElementById("email");
 const senhaInput = document.getElementById("senha");
-
-// IDs corrigidos para bater com o HTML
 const cancelBtn = document.getElementById("cancelBtn"); 
 const listarBtn = document.getElementById("listarBtn");
 
@@ -17,15 +15,13 @@ async function carregarUsuarios() {
         
         const usuarios = await resposta.json();
         
-        // Corrigido para bater com a variável declarada no topo (listaUsuarios)
         listaUsuarios.innerHTML = ""; 
         
         usuarios.forEach(u => {
             const li = document.createElement("li");
-            // Corrigido a sintaxe do onclick: o parêntese deve estar dentro das aspas
             li.innerHTML = `
                 <span>${u.id} - ${u.nome} - ${u.email}</span>
-                <button onclick="prepararEdicao(${u.id}, '${u.nome}', '${u.email}')">Editar</button>
+                <button onclick="editarUsuario(${u.id}, '${u.nome}', '${u.email}')">Editar</button>
                 <button onclick="excluirUsuario(${u.id})">Excluir</button>
             `;
             listaUsuarios.appendChild(li);
@@ -77,17 +73,28 @@ async function excluirUsuario(id) {
     }
 }
 
-assync function editarUsuario(id){
-	try {
-		const resposta =await fetch(`${apiURL}/${id}`);
-		const usuario = await resposta.json();
-		userIdInput.value = usuario.id;
-		nomeInput.value =  usuario.nome;
-		emailInput.value = usuario.email;
-		senha.Input.value = usuario.senha;
-		submit.Btn.textContent = "Atualizar";
-		cancel.Btn.style.display="inner-block";
-	} catch (erro) {
-		console.error("Erro ao buscar usuário para edição: ", erro);
-	}
+async function editarUsuario(id) {
+    try {
+        const resposta = await fetch(`${apiURL}/${id}`);
+        
+        // Se o servidor der erro 500, para aqui e avisa
+        if (!resposta.ok) {
+            alert("Erro no servidor ao buscar usuário!");
+            return;
+        }
+
+        const usuario = await resposta.json();
+        
+        if (usuario) {
+            IdInput.value = usuario.id || "";
+            nomeInput.value = usuario.nome || "";
+            emailInput.value = usuario.email || "";
+            senhaInput.value = usuario.senha || "";
+            
+            submitBtn.textContent = "Atualizar";
+            cancelBtn.style.display = "inline-block";
+        }
+    } catch (erro) {
+        console.error("Erro ao buscar usuário para edição: ", erro);
+    }
 }

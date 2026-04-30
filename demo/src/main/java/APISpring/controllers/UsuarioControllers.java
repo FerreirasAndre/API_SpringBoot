@@ -42,7 +42,7 @@ public class UsuarioControllers {
 		return response;
 	}
 	
-	@GetMapping(value ="/{email}")
+	@GetMapping(value ="/buscar-email/{email}")
 	public Usuario procuraPorEmail(@PathVariable String email) {
 		return service.buscaUsuarioEmail(email);
 	}
