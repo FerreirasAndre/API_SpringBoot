@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Rest	</title>
+    <title>Cadastro de usuários</title>
+    <link rel="stylesheet"  href="./css/style.css">
 </head>
 <body>
-    <h1>HTML da API <h1/>
+    <h1>Cadastro de usuários</h1>
+    <form id="formUsuario"></form>
+        <input type="hidden" id="Id">
+        <input type="text" id="nome" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <input type="password" id="senha" placeholder="Senha" required>
+        <button type="submit" id="submitBtn">Salvar</button>
+		
+		<script src="./script/script.js"></script>
 </body>
 </html>
